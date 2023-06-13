@@ -17,7 +17,7 @@ export default function Home() {
     }, []);
 
   return (
-      <div className={`${inter.className} h-screen w-full bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100`}>
+      <div className={`${inter.className} min-h-screen bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100`}>
         <Header />
         <MainBody />
       </div> 

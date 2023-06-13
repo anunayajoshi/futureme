@@ -1,6 +1,8 @@
 import Options from "./Options";
 import { useState } from "react";
 import axios from "axios";
+import Alert from "./Alert";
+import { set } from "react-hook-form";
 
 
 const MainBody = () => {
@@ -8,27 +10,34 @@ const MainBody = () => {
     const [emailText, setEmailText] = useState<string>('');
    const [email, setEmail] = useState<string>(''); 
    const [duration, setDuration] = useState<string>('');
+    const [alert, setAlert] = useState<boolean>(false);
+    const [success, setSuccess] = useState<boolean>(false);
 
     const handleSubmit = () => {
+
+        if (!emailText || !email || !duration) {
+            setAlert(true);
+          return;
+        }
+        setAlert(false);
+    
          const requestData = {
            email_text: emailText,
            email: email,
            date: duration,
          };
-
-         console.log(requestData)
-
+         setSuccess(true);  
          // Make a POST request to the API
-         axios
-           .post("http://127.0.0.1:8000/api/create_email", requestData)
-           .then((response: any) => {
-             // Handle the API response if needed
-             console.log(response.data);
-           })
-           .catch((error: any) => {
-             // Handle errors if the request fails
-             console.error(error);
-           });
+        axios
+        .post("http://127.0.0.1:8000/api/create_email", requestData)
+        .then((res: any) => {
+            // Handle the API response if needed
+            console.log(res.data);
+        })
+        .catch((error: any) => {
+            // Handle errors if the request fails
+            console.error(error);
+        });
     }
 
   return (
@@ -39,7 +48,7 @@ const MainBody = () => {
         yourself!
       </h3>
 
-      <div className="flex flex-col lg:flex-row w-full">
+      <div className="flex flex-col space-y-4 lg:flex-row w-full">
         <div className="w-full lg:w-3/5">
           <textarea
           value={emailText}
@@ -73,6 +82,9 @@ const MainBody = () => {
           </div>
         </div>
       </div>
+      {alert ? <Alert success={false}/> : ""}
+        {success ? <Alert success={true}/> : ""}
+      
     </div>
   );
 }

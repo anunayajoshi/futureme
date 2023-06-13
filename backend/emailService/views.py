@@ -8,6 +8,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import FutureEmail
 from datetime import datetime, date
+from emailService.task import send_mail_task
+
 
 
 
@@ -36,6 +38,9 @@ def create_email(request):
     send_date = datetime.strptime(request.data["date"], '%Y-%m-%d').date()
     
     email = FutureEmail(email_text=request.data["email_text"], send_date=send_date, email=request.data["email"])
+
+    send_mail_task.delay('Confirmation Email from FutureMe', "Hello! This email is just to confirm that you are able to receive messages on this email address. You will receive your letter from your younger self as per scheduled :). Hope you enjoy the surprise from yourself!", request.data["email"])
     session.add(email)
     session.commit()
-    return JsonResponse({'message': 'email created successfully!'})
+    return JsonResponse({'message': 'email request received successfully!'})
+
