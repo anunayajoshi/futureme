@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-*0=hi6+kq_j+i4+n1a#$v@potktaa27_)t96*@)enck!k#7*8l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'emailService',
     'rest_framework',
     'corsheaders',
+    # 'django_celery_results',
     'django_celery_beat',
 ]
 
