@@ -1,4 +1,5 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
+import { join } from "path";
+import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 
 const Options = ({
@@ -6,6 +7,12 @@ const Options = ({
 }: {
   setDuration: Dispatch<SetStateAction<string>>;
 }) => {
+
+    useEffect(() => {
+        handleButtonClick(0, 1)
+    }, [])
+
+
   const [selectedOption, setSelectedOption] = useState<number>(0);
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
    const buttonLabels = [
