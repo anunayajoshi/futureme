@@ -19,7 +19,7 @@
 
 ## Running the app
 
-You can use `npm run dev` to run the frontend, and `docker-compose up` for the backend. 
+You can use `npm run dev` to run the frontend, and `docker-compose up` for the backend. A .env file is required with a variable `EMAIL_HOST_PASSWORD` and `EMAIL_HOST_USERNAME`, with your corresponding Gmail details. 
 
 ## Build Process
 
