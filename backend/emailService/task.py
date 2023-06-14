@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker
 engine = create_engine("sqlite:///db.sqlite3" +'?check_same_thread=False', echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
+import os
 
 @shared_task(serializer='json', name="send_mail")
 def send_mail_task(subject, message, receiver):
